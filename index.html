@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>A Birthday webpage for youuu</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+
+  <!-- BACKGROUND EFFECTS -->
+  <div class="effects" aria-hidden="true">
+    <div class="balloon b1"></div>
+    <div class="balloon b2"></div>
+    <div class="balloon b3"></div>
+    <div class="balloon b4"></div>
+    <div class="confetti" id="confetti"></div>
+  </div>
+
+  <!-- Landing Page -->
+  <section id="landing" class="page centered">
+    <div class="card">
+      <h1>Happy Birthdayyyyyyy! 🎂💖</h1>
+      <p>Click the button to continue.<br><span class="fontLayout">Please make sure you have an internet connection hehez</span></p>
+      <button id="startBtn">ito, button haha</button>
+    </div>
+  </section>
+
+  <!-- 1) Loading Screen -->
+  <section id="loading" class="page centered hidden">
+    <div class="card" style="max-width:600px;">
+      <h1>Loading birthday surprise…</h1>
+      <p id="loadingText">0%</p>
+      <div class="progress-wrap" aria-hidden="true">
+        <div class="progress" id="progressBar"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2) Rickroll Screen -->
+  <section id="rickroll" class="page centered hidden">
+    <div class="card">
+      <video id="rickVid" width="320" height="240">
+        <source src="rickRoll.mp4.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+      <br>
+      <button id="giftBtn">Click for your gift 🎁</button>
+    </div>
+  </section>
+
+  <!-- Modal used at Rickroll-time or Final Surprise -->
+  <div class="modal-backdrop hidden" id="modalBackdrop">
+    <div class="modal" id="modalBox" role="dialog" aria-modal="true">
+      <p id="modalText">Just kidding haha 😆 Please click the button below.</p>
+      <div style="display:flex; gap:10px; justify-content:center;">
+        <button id="modalCloseBtn" class="option-btn">OK</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mini game -->
+  <section id="gameSection" class="page centered hidden">
+    <h2>Whack-a-Cat 🐱</h2>
+    <p>Catch 5 cats to unlock your surprise 🎁</p>
+    <p>Score: <span id="score">0</span></p>
+    <div id="gameArea"></div>
+  </section>
+
+  <!-- Mini Game Unlock Modal -->
+  <div class="modal-backdrop hidden" id="unlockModal">
+    <div class="modal">
+      <h2>You unlocked it! 🎉</h2>
+      <p>Galing haha! You may now continue.</p>
+      <button id="continueToGreeting">Continue</button>
+    </div>
+  </div>
+  
+
+  <!-- 3) Greeting Page -->
+  <section id="greeting" class="page centered hidden">
+    <div class="card" style="max-width:720px;">
+      <div class="decors">
+        <img src="blackCatHBD2.gif" alt="fries" title="fries">
+        <img src="blackCatHBD1.gif" alt="cute cat gif" title="cat gif">
+      </div>
+      <h1>Happy 21st Birthday, Leannnn!! 🎂💖</h1>
+      <p>Spread your wings and fly high, just like a bird reaching for its dreams.
+        Don't let the darkness weigh you down, life always has a purpose, so choose to live it to the fullest.
+        Always look for the doors filled with light, just like the way I see your eyes sparkle so bright.
+        May God bless you always!<br><b>Never stop dreamin', Queen!</b></p>
+      <button id="continueBtn" class="continue-btn">Continue</button>
+    </div>
+  </section>
+
+  <!-- 4) Choice Page -->
+  <section id="choice" class="page centered hidden">
+    <div class="card" style="max-width:720px;">
+      <h1>Choose one:</h1>
+      <div class="choices" id="topChoices">
+        <button class="option-btn" id="btnGala">Gala</button>
+        <button class="option-btn" id="btnFood">Food</button>
+      </div>
+
+      <!-- Gala Options -->
+      <div id="galaOptions" style="display:none;">
+        <div style="margin-top:12px" class="choices">
+          <button class="option-btn" data-choice="Ride & Grab Snacks" id="galaRide">Ride & Grab Snacks</button>
+          <button class="option-btn" data-choice="La Cascina Henbel (Nature) with Snacks" id="galaNature">Go to La Cascina Henbel (Nature) with Snacks</button>
+        </div>
+
+        <!-- Other Suggestions input + Next button -->
+        <div class="other-wrap">
+          <input type="text" id="galaSuggestions" placeholder="Other suggestions?" class="small-input" />
+          <button id="nextGalaBtn" class="option-btn">Next</button>
+        </div>
+      </div>
+
+      <!-- Food Options -->
+      <div id="foodOptions" style="display:none;">
+        <div style="margin-top:12px" class="choices">
+          <button class="option-btn" id="foodLunch">Lunch</button>
+          <button class="option-btn" id="foodSnack">Snack</button>
+        </div>
+        <!-- lunch choices -->
+        <div id="lunchChoices" style="display:none; margin-top:12px;">
+          <div class="choices">
+            <button class="option-btn" data-choice="Jollibee" id="jabee">Jollibee</button>
+            <button class="option-btn" data-choice="McDo" id="mcdo">McDo</button>
+            <button class="option-btn" data-choice="Unli-wings" id="unli">Unli-wings</button>
+            <button class="option-btn" data-choice="Samgyup" id="samgyup">Samgyup</button>
+          </div>
+          <div class="other-wrap">
+            <input type="text" id="lunchSuggestions" placeholder="Other suggestions?" class="small-input" />
+            <button id="nextLunchBtn" class="option-btn">Next</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Final message screen (after email sent) -->
+  <section id="final" class="page centered hidden">
+    <div class="final-screen" style="max-width:640px;">
+      <h1>Noted, cutie! 💖</h1>
+      <p>You can just reload the website if you'd like to make another choice.</p>
+      <div style="margin-top:18px;">
+        <button onclick="location.reload()" class="option-btn">Reload</button>
+      </div>
+    </div>
+  </section>
+
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+  <script>
+    (function() {
+      emailjs.init("uHhbDTil9BGUTFpRc"); // your PUBLIC KEY
+    })();
+  </script>
+  <script src="script.js"></script>
+
+
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- Step X: Mini Game -->
+<div id="miniGame" class="center hidden">
+    <h2>Catch 5 hearts to unlock your surprise! ❤️</h2>
+    <canvas id="gameCanvas" width="400" height="400" style="background:#fff0f5;border:2px solid #ff8db4;"></canvas>
+    <p id="gameScore">Score: 0</p>
+  </div>
+  
+  <script>
+  let gameCanvas = document.getElementById("gameCanvas");
+  let ctx = gameCanvas.getContext("2d");
+  let basketX = 160;
+  let hearts = [];
+  let score = 0;
+  let gameInterval;
+  
+  function startGame() {
+    showPage("miniGame");
+    hearts = [];
+    score = 0;
+    document.getElementById("gameScore").textContent = "Score: 0";
+    gameInterval = setInterval(updateGame, 30);
+  }
+  
+  function updateGame() {
+    ctx.clearRect(0,0,400,400);
+  
+    // Draw basket
+    ctx.fillStyle = "#ff8db4";
+    ctx.fillRect(basketX, 360, 80, 20);
+  
+    // Randomly drop hearts
+    if(Math.random() < 0.05){
+      hearts.push({x: Math.random()*360, y: 0});
+    }
+  
+    // Move and draw hearts
+    for(let i=0; i<hearts.length; i++){
+      let h = hearts[i];
+      h.y += 3;
+      ctx.fillStyle = "red";
+      ctx.beginPath();
+      ctx.arc(h.x, h.y, 10, 0, Math.PI*2);
+      ctx.fill();
+  
+      // Collision check
+      if(h.y > 350 && h.x > basketX && h.x < basketX+80){
+        hearts.splice(i,1);
+        score++;
+        document.getElementById("gameScore").textContent = "Score: " + score;
+        if(score >= 5){
+          clearInterval(gameInterval);
+          alert("Yay! You caught 5 hearts! 💖");
+          // Move to greeting page
+          showPage("greeting");
+        }
+      }
+    }
+  }
+  
+  // Basket controls
+  document.addEventListener("keydown", (e)=>{
+    if(e.key === "ArrowLeft" && basketX > 0) basketX -= 20;
+    if(e.key === "ArrowRight" && basketX < 320) basketX += 20;
+  });
+  </script>  
+</body>
+</html>
