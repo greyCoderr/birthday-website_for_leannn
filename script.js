@@ -1,8 +1,3 @@
-/* script.js — cleaned & safe (use with your provided HTML)
-   Keeps all original IDs / names from your HTML to avoid breakage.
-   Replace your current script.js with this file.
-*/
-
 document.addEventListener('DOMContentLoaded', () => {
 
   const $ = id => document.getElementById(id);
@@ -10,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
   /* ---------------------------
      Elements (match your HTML IDs)
      --------------------------- */
-  const startBtn = $('startBtn');            // landing start button
+  const startBtn = $('startBtn');           
   const progressBar = $('progressBar');
   const loadingText = $('loadingText');
   const rickVid = $('rickVid');
@@ -61,7 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   /* ---------------------------
      Section list used by showSection()
-     Keep names exactly as your IDs
+     Keep names exactly as IDs
      --------------------------- */
   const SECTIONS = ['landing','loading','rickroll','gameSection','greeting','choice','final'];
 
@@ -85,7 +80,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (modalText) modalText.textContent = text;
     if (!modalBackdrop) return;
 
-    modalBackdrop.classList.add('show'); // css toggles display
+    modalBackdrop.classList.add('show');
 
     // if we want underlying controls still clickable (for the rickroll hint),
     // bring giftBtn to top so user can click it even if backdrop is visible
@@ -267,10 +262,7 @@ document.addEventListener('DOMContentLoaded', () => {
       showSection('choice');
     });
   }
-
-  /* ---------------------------
-     Choice logic (kept as you had it)
-     --------------------------- */
+   
 /* ---------------------------
    Choice logic (fixed)
 --------------------------- */
@@ -289,7 +281,7 @@ if (btnGala) {
   btnGala.addEventListener('click', () => {
     currentTopChoice = 'Gala';
     galaOptions.style.display = 'block';
-    foodOptions.style.display = 'none'; // hide food
+    foodOptions.style.display = 'none';
     disableAndHide(btnGala);
     disableAndHide(btnFood);
   });
@@ -300,7 +292,7 @@ if (btnFood) {
   btnFood.addEventListener('click', () => {
     currentTopChoice = 'Food';
     foodOptions.style.display = 'block';
-    galaOptions.style.display = 'none'; // hide gala
+    galaOptions.style.display = 'none';
     disableAndHide(btnGala);
     disableAndHide(btnFood);
   });
@@ -391,7 +383,7 @@ function openFinalSurpriseModal() {
 
     try {
       await sendEmail(); // send email via EmailJS
-      // On success, update modal and allow user to go to final page
+      
       updateModal("Yay! Your response was sent successfully 🎉", "Done", true);
     } catch (err) {
       console.error("Email send failed:", err);
@@ -412,8 +404,8 @@ async function sendEmail() {
   };
 
   await emailjs.send(
-    "service_0wyib7y",     // ✅ Your Service ID
-    "template_swg4tv2",   // ✅ Your Template ID
+    "service_0wyib7y",     
+    "template_swg4tv2",  
     payload
   );
 }
@@ -432,10 +424,11 @@ function updateModal(message, buttonText, goToFinal = false) {
   if (goToFinal) {
     modalCloseBtn.onclick = () => {
       hideModal();
-      showSection("final"); // move to final page after Done
+      showSection("final");
     };
   }
 }
 
 
 });
+
